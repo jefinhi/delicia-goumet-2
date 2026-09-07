@@ -3,749 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delícias Gourmet | Confeitaria Artesanal em Cabo Frio - RJ</title>
-  
-  <meta name="description" content="Bolos, doces gourmet, salgados, pizzas e kits festa em Tamoios, Cabo Frio - RJ. Faça seu pedido online e receba com carinho!">
-  <meta name="keywords" content="confeitaria em Cabo Frio, bolos em Cabo Frio, doces em Cabo Frio, salgados em Cabo Frio, kits festa em Cabo Frio, pizza em Tamoios, confeitaria em Tamoios">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              cream: '#FFFDD0',
-              softPink: '#FADADD',
-              bgPink: '#FFF5F6',
-              chocolate: '#3D2314',
-              gold: '#D4AF37',
-              goldHover: '#AA820A',
-              whatsapp: '#25D366',
-              whatsappDark: '#1EBE5D'
-            }
-          },
-          fontFamily: {
-            serif: ['Playfair Display', 'serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
+  <title>Catálogo Virtual de Produtos</title>
   <style>
-    /* Ocultar barra de rolagem dos carrosséis mas permitir scroll */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    /* Smooth Transitions */
-    .cart-drawer { transition: transform 0.3s ease-in-out; }
-    .modal-backdrop { transition: opacity 0.2s ease-in-out; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .sector-title {
+      font-size: 1.5rem;
+      color: #0f172a;
+      margin: 40px 0 20px 0;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #2563eb;
+      display: inline-block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background-color: #e2e8f0;
+    }
+
+    .card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .card-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #16a34a;
+      margin-bottom: 15px;
+    }
+
+    .btn-buy {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background-color: #25d366;
+      color: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .btn-buy:hover {
+      background-color: #16a34a;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .container { padding: 15px; }
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
-<body class="bg-brand-bgPink text-brand-chocolate font-sans antialiased selection:bg-brand-softPink selection:text-brand-chocolate">
+<body>
 
-  <script>
-    // Altere este número para o WhatsApp oficial da loja (código do país + DDD + número)
-    const WHATSAPP_NUMBER = "5522999999999";
-  </script>
-
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-brand-softPink/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <a href="#" class="flex flex-col">
-        <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-brand-chocolate">
-          DELÍCIAS <span class="text-brand-gold italic">Gourmet</span>
-        </span>
-        <span class="text-[10px] tracking-widest text-zinc-500 uppercase -mt-1 font-semibold">Cabo Frio • RJ</span>
-      </a>
-
-      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-zinc-700">
-        <a href="#inicio" class="hover:text-brand-gold transition-colors">Início</a>
-        <a href="#bolos" class="hover:text-brand-gold transition-colors">Bolos</a>
-        <a href="#doces" class="hover:text-brand-gold transition-colors">Doces</a>
-        <a href="#salgados" class="hover:text-brand-gold transition-colors">Salgados</a>
-        <a href="#pizzas" class="hover:text-brand-gold transition-colors">Pizzas</a>
-        <a href="#mousses" class="hover:text-brand-gold transition-colors">Mousses</a>
-        <a href="#kits" class="hover:text-brand-gold transition-colors">Kits Festa</a>
-        <a href="#personalizados" class="hover:text-brand-gold transition-colors">Personalizados</a>
-        <a href="#depoimentos" class="hover:text-brand-gold transition-colors">Depoimentos</a>
-        <a href="#contato" class="hover:text-brand-gold transition-colors">Contato</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button onclick="toggleCart()" class="relative p-2.5 bg-brand-chocolate text-white rounded-full hover:bg-brand-gold transition-all duration-300 shadow-md flex items-center justify-center">
-          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-          <span id="cart-badge" class="absolute -top-1 -right-1 bg-brand-gold text-brand-chocolate text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
-        </button>
-
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-brand-chocolate rounded-lg hover:bg-brand-softPink/30">
-          <i data-lucide="menu" class="w-7 h-7"></i>
-        </button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-brand-softPink px-4 pt-2 pb-6 space-y-3">
-      <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Início</a>
-      <a href="#bolos" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Bolos</a>
-      <a href="#doces" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Doces Irresistíveis</a>
-      <a href="#salgados" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Salgados</a>
-      <a href="#pizzas" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Pizzas</a>
-      <a href="#mousses" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Mousses</a>
-      <a href="#kits" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Kits Festa</a>
-      <a href="#personalizados" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Pedidos Personalizados</a>
-      <a href="#depoimentos" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Depoimentos</a>
-      <a href="#contato" onclick="toggleMobileMenu()" class="block py-2 text-zinc-700 font-medium">Localização & Contato</a>
-    </div>
+  <header>
+    <h1>Catálogo Oficial de Produtos</h1>
+    <p>Confira nossas ofertas e faça seu pedido direto pelo WhatsApp</p>
   </header>
 
-  <section id="inicio" class="relative min-h-[85vh] flex items-center justify-center bg-gradient-to-b from-amber-50/40 via-brand-bgPink to-white px-4 py-12 overflow-hidden">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      
-      <div class="space-y-6 text-center lg:text-left z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-softPink/50 border border-brand-softPink text-brand-chocolate text-xs font-semibold tracking-wide">
-          <i data-lucide="sparkles" class="w-4 h-4 text-brand-gold"></i> Confeitaria Artesanal em Tamoios
-        </div>
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-brand-chocolate">
-          O sabor que transforma momentos em <span class="italic text-brand-gold">memórias.</span>
-        </h1>
-        <p class="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto lg:mx-0">
-          Bolos, doces, salgados, pizzas, mousses e kits preparados com carinho para deixar sua comemoração ainda mais especial.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <a href="#bolos" class="px-8 py-4 bg-brand-chocolate text-white rounded-full font-bold hover:bg-brand-gold hover:text-brand-chocolate transition-all duration-300 shadow-lg text-center">
-            VER NOSSO CARDÁPIO
-          </a>
-          <a href="https://wa.me/5522999999999?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" class="px-8 py-4 bg-brand-whatsapp text-white rounded-full font-bold hover:bg-brand-whatsappDark transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
-            <i data-lucide="message-circle" class="w-5 h-5"></i> PEDIR PELO WHATSAPP
-          </a>
-        </div>
+  <div class="container">
 
-        <p class="text-xs sm:text-sm text-zinc-500 pt-2 font-medium flex items-center justify-center lg:justify-start gap-2">
-          <span>Produtos preparados com carinho</span> • <span>Qualidade</span> • <span>Sabor</span> • <span>Atendimento personalizado</span>
-        </p>
+    <!-- SETOR 1: ELETRÔNICOS -->
+    <h2 class="sector-title">Eletrônicos & Tecnologia</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Fone Bluetooth" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Fone de Ouvido Bluetooth</div>
+          <div class="card-desc">Som de alta definição com cancelamento de ruído.</div>
+          <div class="card-price">R$ 149,90</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
+        </div>
       </div>
 
-      <div class="relative z-10 flex justify-center">
-        <div class="relative w-full max-w-md lg:max-w-none">
-          <div class="absolute -inset-4 bg-gradient-to-r from-brand-softPink to-amber-200 rounded-3xl blur-2xl opacity-50 -z-10"></div>
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80" alt="Bolo de Chocolate Gourmet" class="rounded-3xl shadow-2xl object-cover w-full h-[400px] lg:h-[500px]">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Smartwatch" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Smartwatch Esportivo</div>
+          <div class="card-desc">Monitoramento cardíaco, passos e notificações.</div>
+          <div class="card-price">R$ 229,00</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border border-brand-softPink/40">
-      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div class="relative w-full md:w-1/2">
-          <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
-          <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="O que você está procurando? (ex: Brigadeiro, Coxinha, Pizza...)" class="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/50 text-sm">
-        </div>
-        <div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-          <button onclick="filterCategory('all')" class="px-4 py-2 bg-brand-chocolate text-white text-xs font-semibold rounded-lg shrink-0">Todos</button>
-          <button onclick="filterCategory('bolos')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🍰 Bolos</button>
-          <button onclick="filterCategory('doces')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🍫 Doces</button>
-          <button onclick="filterCategory('salgados')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🥟 Salgados</button>
-          <button onclick="filterCategory('pizzas')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🍕 Pizzas</button>
-          <button onclick="filterCategory('mousses')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🍮 Mousses</button>
-          <button onclick="filterCategory('kits')" class="px-4 py-2 bg-zinc-100 hover:bg-brand-softPink text-zinc-700 text-xs font-semibold rounded-lg shrink-0">🎉 Kits Festa</button>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80" alt="Notebook" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Notebook Ultra Fino</div>
+          <div class="card-desc">Processador rápido, ideal para trabalho e estudos.</div>
+          <div class="card-price">R$ 2.899,00</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
         </div>
       </div>
     </div>
-  </section>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16" id="catalog-container">
-    
-    <section class="space-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-          OS QUERIDINHOS DA DELÍCIAS GOURMET ❤️
-        </h2>
-      </div>
-      <div class="relative group">
-        <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-featured">
-          </div>
-      </div>
-    </section>
-
-    <section id="bolos" class="space-y-4 catalog-row" data-category="bolos">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🍰 BOLOS ARTESANAIS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-bolos"></div>
-    </section>
-
-    <section id="doces" class="space-y-4 catalog-row" data-category="doces">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🍫 DOCES IRRESISTÍVEIS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-doces"></div>
-    </section>
-
-    <section id="salgados" class="space-y-4 catalog-row" data-category="salgados">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🥟 SALGADOS FRITOS & CROCANTES
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-salgados-fritos"></div>
-    </section>
-
-    <section class="space-y-4 catalog-row" data-category="salgados">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🥐 SALGADOS ASSADOS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-salgados-assados"></div>
-    </section>
-
-    <section id="pizzas" class="space-y-4 catalog-row" data-category="pizzas">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🍕 PIZZAS ARTESANAIS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-pizzas"></div>
-    </section>
-
-    <section id="mousses" class="space-y-4 catalog-row" data-category="mousses">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🍮 MOUSSES CREMOSOS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-mousses"></div>
-    </section>
-
-    <section id="kits" class="space-y-4 catalog-row" data-category="kits">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-chocolate flex items-center gap-2">
-        🎉 KITS FESTA PRONTOS
-      </h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 scroll-smooth" id="row-kits"></div>
-    </section>
-
-  </main>
-
-  <section class="bg-amber-50/50 py-16 border-y border-brand-softPink/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="font-serif text-3xl font-bold text-center text-brand-chocolate mb-10">PARA CADA MOMENTO, UMA DELÍCIA</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm text-center border border-zinc-100 hover:shadow-md transition-shadow">
-          <span class="text-3xl block mb-2">🎂</span>
-          <h3 class="font-bold text-sm sm:text-base text-brand-chocolate">Aniversários</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm text-center border border-zinc-100 hover:shadow-md transition-shadow">
-          <span class="text-3xl block mb-2">💍</span>
-          <h3 class="font-bold text-sm sm:text-base text-brand-chocolate">Casamentos</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm text-center border border-zinc-100 hover:shadow-md transition-shadow">
-          <span class="text-3xl block mb-2">👶</span>
-          <h3 class="font-bold text-sm sm:text-base text-brand-chocolate">Chá de Bebê</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm text-center border border-zinc-100 hover:shadow-md transition-shadow">
-          <span class="text-3xl block mb-2">🏢</span>
-          <h3 class="font-bold text-sm sm:text-base text-brand-chocolate">Eventos Corporativos</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="personalizados" class="max-w-4xl mx-auto px-4 py-16">
-    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-brand-softPink">
-      <div class="text-center max-w-2xl mx-auto mb-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Exclusivo</span>
-        <h2 class="font-serif text-3xl font-bold text-brand-chocolate mt-1">✨ PRECISA DE ALGO PERSONALIZADO?</h2>
-        <p class="text-zinc-600 mt-2 text-sm">Tem uma ideia diferente para sua festa? Conte para a gente. Criamos pedidos personalizados de acordo com sua ocasião, quantidade e preferência.</p>
-      </div>
-
-      <form id="custom-order-form" onsubmit="sendCustomOrder(event)" class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 mb-1">Seu Nome *</label>
-            <input type="text" id="cust-name" required class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 mb-1">WhatsApp *</label>
-            <input type="tel" id="cust-phone" required class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm" placeholder="(22) 99999-9999">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 mb-1">Tipo de Evento</label>
-            <input type="text" id="cust-event" placeholder="Aniversário, Casamento..." class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 mb-1">Data do Evento</label>
-            <input type="date" id="cust-date" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 mb-1">Nº de Convidados</label>
-            <input type="number" id="cust-guests" placeholder="Ex: 30" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-700 mb-1">Detalhes do Pedido & Tema</label>
-          <textarea id="cust-details" rows="3" placeholder="Descreva os produtos, sabores, tema da festa ou orçamento estimado..." class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm"></textarea>
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-brand-chocolate text-white font-bold rounded-xl hover:bg-brand-gold transition-colors flex items-center justify-center gap-2">
-          <i data-lucide="send" class="w-4 h-4"></i> SOLICITAR ORÇAMENTO PELO WHATSAPP
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <section id="depoimentos" class="max-w-7xl mx-auto px-4 py-12">
-    <h2 class="font-serif text-3xl font-bold text-center text-brand-chocolate mb-8">💖 O QUE NOSSOS CLIENTES DIZEM</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-softPink/40 space-y-3">
-        <div class="flex text-amber-400 gap-1"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-sm text-zinc-600 italic">"O bolo de Ninho com Nutella do aniversário do meu filho foi o grande destaque da festa! Super molhadinho e saboroso."</p>
-        <span class="block font-bold text-xs text-brand-chocolate">— Mariana Silva (Tamoios)</span>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-softPink/40 space-y-3">
-        <div class="flex text-amber-400 gap-1"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-sm text-zinc-600 italic">"O Kit Festa Médio salvou a comemoração aqui no escritório. Os salgados chegaram quentinhos e crocantes."</p>
-        <span class="block font-bold text-xs text-brand-chocolate">— Carlos Eduardo (Cabo Frio)</span>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-softPink/40 space-y-3">
-        <div class="flex text-amber-400 gap-1"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-sm text-zinc-600 italic">"Atendimento impecável e o sistema de pedir pelo WhatsApp facilitou muito. Recomendo de olhos fechados!"</p>
-        <span class="block font-bold text-xs text-brand-chocolate">— Patrícia Mendes</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato" class="bg-zinc-900 text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <span class="text-xs font-bold text-brand-gold uppercase tracking-widest">📍 Onde Estamos</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold">Venha nos visitar ou peça para entrega</h2>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          Rua do Sol, Tamoios, Cabo Frio – RJ<br>
-          <span class="text-xs text-zinc-500">Atendemos Tamoios e regiões próximas em Cabo Frio.</span>
-        </p>
-
-        <div class="space-y-2 pt-2">
-          <p class="text-sm font-semibold flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-brand-gold"></i> Horário de Atendimento:</p>
-          <p class="text-xs text-zinc-400">Consulte nosso horário de funcionamento atualizado diretamente no WhatsApp.</p>
-        </div>
-
-        <a href="https://maps.google.com/?q=Rua+do+Sol+Tamoios+Cabo+Frio+RJ" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-gold text-brand-chocolate font-bold rounded-xl text-sm hover:bg-white transition-colors">
-          <i data-lucide="map-pin" class="w-4 h-4"></i> COMO CHEGAR
-        </a>
-      </div>
-
-      <div class="w-full h-72 rounded-2xl overflow-hidden shadow-2xl bg-zinc-800 flex items-center justify-center">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14713.823908864756!2d-42.02!3d-22.61!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x971b3e8e455555%3A0x0!2sRua%20do%20Sol%2C%20Tamoios%2C%20Cabo%20Frio%20-%20RJ!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <footer class="bg-brand-chocolate text-white border-t border-amber-900/40 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-      
-      <div class="space-y-3">
-        <span class="font-serif text-2xl font-bold">DELÍCIAS <span class="text-brand-gold italic">Gourmet</span></span>
-        <p class="text-xs text-amber-200/70 leading-relaxed">Bolos, doces, salgados, pizzas, mousses e kits preparados com carinho e qualidade premium em Cabo Frio - RJ.</p>
-      </div>
-
-      <div>
-        <h4 class="font-bold text-sm text-brand-gold mb-3">NAVEGAÇÃO</h4>
-        <ul class="space-y-2 text-xs text-amber-100/80">
-          <li><a href="#inicio" class="hover:text-white">Início</a></li>
-          <li><a href="#bolos" class="hover:text-white">Bolos Artesanais</a></li>
-          <li><a href="#doces" class="hover:text-white">Doces Irresistíveis</a></li>
-          <li><a href="#salgados" class="hover:text-white">Salgados Fritos & Assados</a></li>
-          <li><a href="#kits" class="hover:text-white">Kits Festa</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="font-bold text-sm text-brand-gold mb-3">ATENDIMENTO</h4>
-        <p class="text-xs text-amber-100/80">Rua do Sol, Tamoios</p>
-        <p class="text-xs text-amber-100/80">Cabo Frio – RJ</p>
-        <p class="text-xs text-amber-100/80 mt-2">Atendimento rápido via WhatsApp</p>
-      </div>
-
-      <div>
-        <h4 class="font-bold text-sm text-brand-gold mb-3">REDES SOCIAIS</h4>
-        <div class="flex gap-3">
-          <a href="#" class="p-2 bg-amber-950/60 rounded-full hover:bg-brand-gold hover:text-brand-chocolate transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-          <a href="#" class="p-2 bg-amber-950/60 rounded-full hover:bg-brand-gold hover:text-brand-chocolate transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-          <a href="https://wa.me/5522999999999" target="_blank" class="p-2 bg-amber-950/60 rounded-full hover:bg-brand-gold hover:text-brand-chocolate transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+    <!-- SETOR 2: CASA E DECORAÇÃO -->
+    <h2 class="sector-title">Casa & Decoração</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80" alt="Luminária" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Luminária de Mesa LED</div>
+          <div class="card-desc">Design moderno com ajuste de intensidade.</div>
+          <div class="card-price">R$ 89,90</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
         </div>
       </div>
 
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-amber-900/50 text-center text-xs text-amber-200/50">
-      © 2026 Delícias Gourmet. Todos os direitos reservados.
-    </div>
-  </footer>
-
-  <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity"></div>
-  
-  <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl cart-drawer translate-x-full flex flex-col">
-    <div class="p-4 bg-brand-chocolate text-white flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-gold"></i>
-        <h3 class="font-bold text-lg">Seu Carrinho</h3>
-      </div>
-      <button onclick="toggleCart()" class="p-1 hover:text-brand-softPink"><i data-lucide="x" class="w-6 h-6"></i></button>
-    </div>
-
-    <div id="cart-toast" class="hidden bg-emerald-100 border-l-4 border-emerald-500 text-emerald-700 p-2 text-xs font-semibold text-center">
-      Produto adicionado ao carrinho! ❤️
-    </div>
-
-    <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
-      <p class="text-center text-zinc-400 py-10 text-sm">Seu carrinho está vazio.</p>
-    </div>
-
-    <div class="p-4 border-t border-zinc-100 bg-zinc-50 space-y-3">
-      <div class="flex justify-between items-center text-lg font-bold text-brand-chocolate">
-        <span>TOTAL:</span>
-        <span id="cart-total" class="text-brand-gold">R$ 0,00</span>
-      </div>
-
-      <button onclick="checkoutWhatsApp()" class="w-full py-3.5 bg-brand-whatsapp text-white font-bold rounded-xl hover:bg-brand-whatsappDark transition-colors flex items-center justify-center gap-2 shadow-lg">
-        <i data-lucide="message-circle" class="w-5 h-5"></i> FINALIZAR PEDIDO PELO WHATSAPP
-      </button>
-    </div>
-  </aside>
-
-  <div id="product-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200">
-      <button onclick="closeModal()" class="absolute right-4 top-4 bg-white/80 backdrop-blur-md p-1.5 rounded-full text-zinc-700 hover:bg-white z-10">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      
-      <div id="modal-content">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=500&q=80" alt="Vaso Decorativo" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Vaso Cerâmica Minimalista</div>
+          <div class="card-desc">Perfeito para salas, escritórios e quartos.</div>
+          <div class="card-price">R$ 59,90</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
         </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=80" alt="Cadeira de Escritório" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Cadeira Ergonômica</div>
+          <div class="card-desc">Conforto prolongado para quem trabalha sentado.</div>
+          <div class="card-price">R$ 450,00</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
+        </div>
+      </div>
     </div>
+
+    <!-- SETOR 3: ACESSÓRIOS -->
+    <h2 class="sector-title">Acessórios & Estilo</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" alt="Mochila" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Mochila Impermeável</div>
+          <div class="card-desc">Espaço para notebook e compartimentos antifurto.</div>
+          <div class="card-price">R$ 179,90</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80" alt="Óculos de Sol" loading="lazy">
+        <div class="card-content">
+          <div class="card-title">Óculos de Sol Polarizado</div>
+          <div class="card-desc">Proteção UV400 com armação leve e resistente.</div>
+          <div class="card-price">R$ 119,00</div>
+          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <a href="https://wa.me/5522999999999?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" class="fixed bottom-6 right-6 bg-brand-whatsapp text-white p-4 rounded-full shadow-2xl hover:bg-brand-whatsappDark transition-all duration-300 z-40 flex items-center gap-2 group">
-    <i data-lucide="message-circle" class="w-7 h-7"></i>
-    <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-bold pl-0 group-hover:pl-1">
-      Fale conosco pelo WhatsApp
-    </span>
-  </a>
-
-  <script>
-    // BASE DE DADOS DE PRODUTOS COM PREÇOS REALISTAS DA REGIÃO DE CABO FRIO / TAMOIOS - RJ
-    const PRODUCTS = [
-      // BOLOS
-      { id: 'b1', category: 'bolos', name: 'Bolo de Chocolate Gourmet', desc: 'Massa fofinha de cacau 50% recheada com brigadeiro cremoso artesanal.', price: 65.00, img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80', featured: true, options: ['Pequeno (1kg) - R$ 65', 'Médio (2kg) - R$ 120', 'Festa (3kg) - R$ 170'] },
-      { id: 'b2', category: 'bolos', name: 'Bolo de Ninho com Nutella', desc: 'O queridinho do Brasil. Camadas generosas de Leite Ninho e Nutella pura.', price: 75.00, img: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80', featured: true, options: ['Pequeno (1kg) - R$ 75', 'Médio (2kg) - R$ 140'] },
-      { id: 'b3', category: 'bolos', name: 'Bolo Red Velvet', desc: 'Massa aveludada vermelha com recheio tradicional suave de Cream Cheese.', price: 80.00, img: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=600&q=80', featured: false },
-      { id: 'b4', category: 'bolos', name: 'Bolo de Morango com Natas', desc: 'Massa branca bem molhadinha, morangos frescos picados e creme leve.', price: 70.00, img: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80', featured: false },
-      { id: 'b5', category: 'bolos', name: 'Bolo de Cenoura com Chocolate', desc: 'Aquele clássico caseiro com cobertura vulcão de brigadeiro gourmet.', price: 50.00, img: 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=600&q=80', featured: false },
-
-      // DOCES
-      { id: 'd1', category: 'doces', name: 'Brigadeiro Gourmet 100% Cacau', desc: 'Confeito de chocolate belga, massa aveludada e cremosa.', price: 3.00, img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80', featured: true, options: ['12 unidades - R$ 35', '25 unidades - R$ 70', '50 unidades - R$ 130'] },
-      { id: 'd2', category: 'doces', name: 'Beijinho de Coco Fresco', desc: 'Docinho tradicional envolvido em coco ralado fino e cravo perfumado.', price: 2.80, img: 'https://images.unsplash.com/photo-1599785209707-a456fc1337cc?auto=format&fit=crop&w=600&q=80', featured: false, options: ['25 unidades - R$ 65', '50 unidades - R$ 120'] },
-      { id: 'd3', category: 'doces', name: 'Brownie Recheado com Doce de Leite', desc: 'Casquinha crocante por fora, extremamente macio por dentro.', price: 8.50, img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80', featured: true },
-      { id: 'd4', category: 'doces', name: 'Copinho de Chocolate com Trufa', desc: 'Copinho crocante de chocolate meio amargo recheado com trufa de maracujá.', price: 4.50, img: 'https://images.unsplash.com/photo-1570476553129-5d5b7638651a?auto=format&fit=crop&w=600&q=80', featured: false },
-
-      // SALGADOS FRITOS
-      { id: 'sf1', category: 'salgados', sub: 'fritos', name: 'Coxinha de Frango com Catupiry', desc: 'Massa leve e recheio de frango desfiado bem temperadinho com requijão.', price: 1.50, img: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80', featured: true, options: ['25 unidades - R$ 35', '50 unidades - R$ 65', '100 unidades - R$ 120'] },
-      { id: 'sf2', category: 'salgados', sub: 'fritos', name: 'Bolinha de Queijo Crocante', desc: 'Mussarela derretida por dentro e casquinha super crocante.', price: 1.50, img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80', featured: false, options: ['25 unidades - R$ 35', '50 unidades - R$ 65'] },
-      { id: 'sf3', category: 'salgados', sub: 'fritos', name: 'Kibe Tradicional com Hortelã', desc: 'Carne moída selecionada bem temperada com especiarias e hortelã fresca.', price: 1.60, img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80', featured: false },
-
-      // SALGADOS ASSADOS
-      { id: 'sa1', category: 'salgados', sub: 'assados', name: 'Empada de Frango Gourmet', desc: 'Massa podre que derrete na boca com recheio cremoso.', price: 5.00, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80', featured: false },
-      { id: 'sa2', category: 'salgados', sub: 'assados', name: 'Esfiha de Carne Aberta', desc: 'Massa macia assada na hora com tempero árabe tradicional.', price: 4.50, img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80', featured: false },
-
-      // PIZZAS
-      { id: 'p1', category: 'pizzas', name: 'Pizza Calabresa Especial', desc: 'Massa artesanal, molho caseiro de tomate, calabresa fatiada e cebola.', price: 42.00, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', featured: false, options: ['Média - R$ 42', 'Grande - R$ 55'] },
-      { id: 'p2', category: 'pizzas', name: 'Pizza Frango com Catupiry', desc: 'Frango desfiado suculento coberto com Catupiry original.', price: 45.00, img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80', featured: true, options: ['Média - R$ 45', 'Grande - R$ 58'] },
-
-      // MOUSSES
-      { id: 'm1', category: 'mousses', name: 'Mousse Cremoso de Maracujá', desc: 'O equilíbrio perfeito entre o azedinho da fruta e a doçura do leite condensado.', price: 12.00, img: 'https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format&fit=crop&w=600&q=80', featured: false },
-      { id: 'm2', category: 'mousses', name: 'Mousse de Chocolate Aveludado', desc: 'Feito com chocolate nobre meio amargo e chantilly.', price: 14.00, img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80', featured: false },
-
-      // KITS FESTA
-      { id: 'k1', category: 'kits', name: 'Kit Festa Pequeno (Serve 10 pessoas)', desc: '1 Bolo de 1kg + 30 Docinhos + 50 Salgados Fritos sortidos.', price: 160.00, img: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80', featured: true },
-      { id: 'k2', category: 'kits', name: 'Kit Festa Médio (Serve 20 pessoas)', desc: '1 Bolo de 2kg + 60 Docinhos + 100 Salgados Fritos + 1 Refrigerante 2L.', price: 290.00, img: 'https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=600&q=80', featured: true }
-    ];
-
-    // ESTADO DO CARRINHO
-    let cart = [];
-
-    // INICIALIZAÇÃO DA PÁGINA
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      renderCatalog();
-    });
-
-    // RENDERIZAR CARROSSÉIS NETFLIX
-    function renderCatalog() {
-      const featuredRow = document.getElementById('row-featured');
-      const bolosRow = document.getElementById('row-bolos');
-      const docesRow = document.getElementById('row-doces');
-      const fritosRow = document.getElementById('row-salgados-fritos');
-      const assadosRow = document.getElementById('row-salgados-assados');
-      const pizzasRow = document.getElementById('row-pizzas');
-      const moussesRow = document.getElementById('row-mousses');
-      const kitsRow = document.getElementById('row-kits');
-
-      PRODUCTS.forEach(product => {
-        const cardHTML = createProductCard(product);
-
-        if (product.featured) featuredRow.innerHTML += cardHTML;
-        if (product.category === 'bolos') bolosRow.innerHTML += cardHTML;
-        if (product.category === 'doces') docesRow.innerHTML += cardHTML;
-        if (product.category === 'salgados' && product.sub === 'fritos') fritosRow.innerHTML += cardHTML;
-        if (product.category === 'salgados' && product.sub === 'assados') assadosRow.innerHTML += cardHTML;
-        if (product.category === 'pizzas') pizzasRow.innerHTML += cardHTML;
-        if (product.category === 'mousses') moussesRow.innerHTML += cardHTML;
-        if (product.category === 'kits') kitsRow.innerHTML += cardHTML;
-      });
-
-      lucide.createIcons();
-    }
-
-    // HTML DO CARD DE PRODUTO
-    function createProductCard(p) {
-      return `
-        <div class="shrink-0 w-64 sm:w-72 bg-white rounded-2xl border border-zinc-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
-          <div>
-            <div class="relative h-44 overflow-hidden bg-zinc-100 cursor-pointer" onclick="openModal('${p.id}')">
-              <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-brand-chocolate font-bold text-xs px-2.5 py-1 rounded-full shadow">
-                R$ ${p.price.toFixed(2).replace('.', ',')}
-              </span>
-            </div>
-            <div class="p-4 space-y-2">
-              <h3 class="font-bold text-base text-brand-chocolate group-hover:text-brand-gold transition-colors line-clamp-1" onclick="openModal('${p.id}')">${p.name}</h3>
-              <p class="text-xs text-zinc-500 line-clamp-2">${p.desc}</p>
-            </div>
-          </div>
-          <div class="p-4 pt-0 space-y-2">
-            <button onclick="addToCart('${p.id}')" class="w-full py-2.5 bg-brand-chocolate text-white text-xs font-bold rounded-xl hover:bg-brand-gold hover:text-brand-chocolate transition-colors flex items-center justify-center gap-1.5 shadow">
-              <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> ADICIONAR AO CARRINHO
-            </button>
-            <button onclick="quickOrderWhatsApp('${p.name}')" class="w-full py-2 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-xl hover:bg-emerald-100 transition-colors flex items-center justify-center gap-1">
-              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Pedir pelo WhatsApp
-            </button>
-          </div>
-        </div>
-      `;
-    }
-
-    // LÓGICA DO CARRINHO
-    function addToCart(productId) {
-      const product = PRODUCTS.find(p => p.id === productId);
-      if (!product) return;
-
-      const existingIndex = cart.findIndex(item => item.id === productId);
-      if (existingIndex > -1) {
-        cart[existingIndex].qty += 1;
-      } else {
-        cart.push({ ...product, qty: 1 });
-      }
-
-      updateCartUI();
-      showToast();
-    }
-
-    function changeQty(productId, delta) {
-      const item = cart.find(i => i.id === productId);
-      if (!item) return;
-
-      item.qty += delta;
-      if (item.qty <= 0) {
-        cart = cart.filter(i => i.id !== productId);
-      }
-      updateCartUI();
-    }
-
-    function removeFromCart(productId) {
-      cart = cart.filter(i => i.id !== productId);
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartBadge = document.getElementById('cart-badge');
-      const cartTotal = document.getElementById('cart-total');
-
-      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
-      const totalPrice = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
-
-      cartBadge.innerText = totalItems;
-      cartTotal.innerText = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
-
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<p class="text-center text-zinc-400 py-10 text-sm">Seu carrinho está vazio.</p>`;
-        return;
-      }
-
-      cartItemsContainer.innerHTML = cart.map(item => `
-        <div class="flex items-center gap-3 bg-zinc-50 p-3 rounded-xl border border-zinc-200/60">
-          <img src="${item.img}" class="w-14 h-14 object-cover rounded-lg">
-          <div class="flex-1 min-w-0">
-            <h4 class="font-bold text-xs text-brand-chocolate truncate">${item.name}</h4>
-            <span class="text-xs text-zinc-500">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
-            <div class="flex items-center gap-2 mt-1">
-              <button onclick="changeQty('${item.id}', -1)" class="w-5 h-5 bg-zinc-200 rounded flex items-center justify-center text-xs font-bold">-</button>
-              <span class="text-xs font-bold">${item.qty}</span>
-              <button onclick="changeQty('${item.id}', 1)" class="w-5 h-5 bg-zinc-200 rounded flex items-center justify-center text-xs font-bold">+</button>
-            </div>
-          </div>
-          <button onclick="removeFromCart('${item.id}')" class="text-zinc-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-        </div>
-      `).join('');
-
-      lucide.createIcons();
-    }
-
-    function toggleCart() {
-      const drawer = document.getElementById('cart-drawer');
-      const overlay = document.getElementById('cart-overlay');
-
-      if (drawer.classList.contains('translate-x-full')) {
-        drawer.classList.remove('translate-x-full');
-        overlay.classList.remove('hidden');
-        setTimeout(() => overlay.classList.remove('opacity-0'), 10);
-      } else {
-        drawer.classList.add('translate-x-full');
-        overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.classList.add('hidden'), 300);
-      }
-    }
-
-    function showToast() {
-      const toast = document.getElementById('cart-toast');
-      toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 2500);
-    }
-
-    // CHECKOUT WHATSAPP
-    function checkoutWhatsApp() {
-      if (cart.length === 0) {
-        alert("Seu carrinho está vazio! Adicione alguns produtos antes de finalizar.");
-        return;
-      }
-
-      let message = "Olá! Quero fazer um pedido na Delícias Gourmet.\n\n🛍️ *MEU PEDIDO:*\n";
-      let total = 0;
-
-      cart.forEach(item => {
-        const itemSubtotal = item.price * item.qty;
-        total += itemSubtotal;
-        message += `• ${item.qty}x ${item.name} - R$ ${itemSubtotal.toFixed(2).replace('.', ',')}\n`;
-      });
-
-      message += `\n💰 *TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n\nGostaria de confirmar a disponibilidade e combinar a entrega/retirada.`;
-
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
-    }
-
-    function quickOrderWhatsApp(productName) {
-      const msg = encodeURIComponent(`Olá! Gostaria de fazer um pedido de: ${productName}. Poderia me enviar mais informações?`);
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
-    }
-
-    function sendCustomOrder(e) {
-      e.preventDefault();
-      const name = document.getElementById('cust-name').value;
-      const phone = document.getElementById('cust-phone').value;
-      const eventType = document.getElementById('cust-event').value;
-      const date = document.getElementById('cust-date').value;
-      const guests = document.getElementById('cust-guests').value;
-      const details = document.getElementById('cust-details').value;
-
-      let msg = `✨ *SOLICITAÇÃO DE ORÇAMENTO PERSONALIZADO*\n\n`;
-      msg += `👤 *Nome:* ${name}\n`;
-      msg += `📞 *WhatsApp:* ${phone}\n`;
-      if (eventType) msg += `🎉 *Evento:* ${eventType}\n`;
-      if (date) msg += `📅 *Data:* ${date}\n`;
-      if (guests) msg += `👥 *Convidados:* ${guests}\n`;
-      if (details) msg += `📝 *Detalhes:* ${details}\n`;
-
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    // MODAL DE DETALHES
-    function openModal(productId) {
-      const p = PRODUCTS.find(item => item.id === productId);
-      if (!p) return;
-
-      const modalContent = document.getElementById('modal-content');
-      modalContent.innerHTML = `
-        <img src="${p.img}" class="w-full h-56 object-cover">
-        <div class="p-6 space-y-4">
-          <h3 class="font-serif text-2xl font-bold text-brand-chocolate">${p.name}</h3>
-          <p class="text-sm text-zinc-600">${p.desc}</p>
-          ${p.options ? `
-            <div>
-              <label class="block text-xs font-bold text-zinc-700 mb-1">Opções disponíveis:</label>
-              <select class="w-full p-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs">
-                ${p.options.map(opt => `<option>${opt}</option>`).join('')}
-              </select>
-            </div>
-          ` : ''}
-          <div class="flex items-center justify-between pt-2">
-            <span class="text-xl font-bold text-brand-gold">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
-            <button onclick="addToCart('${p.id}'); closeModal(); toggleCart();" class="px-6 py-3 bg-brand-chocolate text-white text-xs font-bold rounded-xl hover:bg-brand-gold hover:text-brand-chocolate transition-colors">
-              ADICIONAR AO CARRINHO
-            </button>
-          </div>
-        </div>
-      `;
-
-      document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    // NAVEGAÇÃO E FILTROS DE PESQUISA
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-
-    function filterProducts() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const rows = document.querySelectorAll('.catalog-row');
-
-      rows.forEach(row => {
-        const cards = row.querySelectorAll('.shrink-0');
-        let hasVisible = false;
-
-        cards.forEach(card => {
-          const title = card.querySelector('h3').innerText.toLowerCase();
-          if (title.includes(query)) {
-            card.style.display = 'flex';
-            hasVisible = true;
-          } else {
-            card.style.display = 'none';
-          }
-        });
-
-        row.style.display = hasVisible ? 'block' : 'none';
-      });
-    }
-
-    function filterCategory(cat) {
-      const rows = document.querySelectorAll('.catalog-row');
-      rows.forEach(row => {
-        if (cat === 'all' || row.dataset.category === cat) {
-          row.style.display = 'block';
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    }
-  </script>
 </body>
 </html>
