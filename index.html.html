@@ -3,235 +3,486 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo Virtual de Produtos</title>
+  <title>Delícia Gourmet Doces | Cardápio Netflix</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     body {
-      background-color: #f8fafc;
-      color: #1e293b;
-      line-height: 1.5;
-    }
-
-    header {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
+      background-color: #141414;
       color: #fff;
-      padding: 40px 20px;
-      text-align: center;
+      overflow-x: hidden;
+      padding-bottom: 90px;
     }
 
-    header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+    /* HEADER FIXO ESTILO NETFLIX */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 4%;
+      border-bottom: 1px solid #222;
     }
 
-    header p {
-      color: #94a3b8;
-      font-size: 1.1rem;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
-
-    .sector-title {
+    .logo {
+      color: #e50914;
       font-size: 1.5rem;
-      color: #0f172a;
-      margin: 40px 0 20px 0;
-      padding-bottom: 8px;
-      border-bottom: 3px solid #2563eb;
-      display: inline-block;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+    .cart-btn-header {
+      background: #e50914;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-count {
+      background: #fff;
+      color: #e50914;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+    }
+
+    /* BANNER DE DESTAQUE */
+    .hero {
+      height: 40vh;
+      background: linear-gradient(to top, #141414, transparent), 
+                  url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px 4%;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .hero-text p {
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    /* CARROSSÉIS NETFLIX */
+    .section-title {
+      font-size: 1.3rem;
+      margin: 25px 4% 12px 4%;
+      color: #e5e5e5;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 0 4% 15px 4%;
+      scroll-behavior: smooth;
+    }
+
+    .carousel::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .carousel::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 10px;
     }
 
     .card {
-      background: #ffffff;
-      border-radius: 12px;
+      min-width: 240px;
+      max-width: 240px;
+      background: #181818;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
+      border: 1px solid #282828;
+      transition: transform 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      transform: scale(1.03);
     }
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 150px;
       object-fit: cover;
-      background-color: #e2e8f0;
     }
 
-    .card-content {
-      padding: 20px;
+    .card-info {
+      padding: 12px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
 
     .card-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #1e293b;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
 
     .card-desc {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin-bottom: 15px;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 10px;
       flex-grow: 1;
     }
 
     .card-price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #16a34a;
-      margin-bottom: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #46d369;
+      margin-bottom: 12px;
     }
 
-    .btn-buy {
-      display: block;
-      width: 100%;
+    .card-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-add, .btn-wa {
+      flex: 1;
+      padding: 8px 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
       text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-add {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .btn-add:hover {
+      background-color: #444;
+    }
+
+    .btn-wa {
       background-color: #25d366;
       color: #fff;
-      padding: 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.2s;
     }
 
-    .btn-buy:hover {
-      background-color: #16a34a;
+    .btn-wa:hover {
+      background-color: #1eb954;
+    }
+
+    /* BARRA FIXA DE FINALIZAR CARRINHO */
+    .cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #181818;
+      border-top: 2px solid #e50914;
+      padding: 15px 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .cart-bar-total {
+      font-size: 1.1rem;
+    }
+
+    .cart-bar-total span {
+      color: #46d369;
+      font-weight: bold;
+    }
+
+    .btn-checkout {
+      background: #25d366;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
     }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
-      .container { padding: 15px; }
-      .grid { grid-template-columns: 1fr; }
+      .card { min-width: 200px; max-width: 200px; }
+      .card img { height: 120px; }
+      .hero { height: 30vh; }
+      .hero-text h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Catálogo Oficial de Produtos</h1>
-    <p>Confira nossas ofertas e faça seu pedido direto pelo WhatsApp</p>
+    <div class="logo">Delícia Gourmet</div>
+    <button class="cart-btn-header" onclick="finalizarPedido()">
+      🛒 Carrinho <span class="cart-count" id="cartCount">0</span>
+    </button>
   </header>
 
-  <div class="container">
-
-    <!-- SETOR 1: ELETRÔNICOS -->
-    <h2 class="sector-title">Eletrônicos & Tecnologia</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Fone Bluetooth" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Fone de Ouvido Bluetooth</div>
-          <div class="card-desc">Som de alta definição com cancelamento de ruído.</div>
-          <div class="card-price">R$ 149,90</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Smartwatch" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Smartwatch Esportivo</div>
-          <div class="card-desc">Monitoramento cardíaco, passos e notificações.</div>
-          <div class="card-price">R$ 229,00</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80" alt="Notebook" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Notebook Ultra Fino</div>
-          <div class="card-desc">Processador rápido, ideal para trabalho e estudos.</div>
-          <div class="card-price">R$ 2.899,00</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Delícia Gourmet Doces</h1>
+      <p>O melhor da confeitaria artesanal entregue na sua porta.</p>
     </div>
-
-    <!-- SETOR 2: CASA E DECORAÇÃO -->
-    <h2 class="sector-title">Casa & Decoração</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80" alt="Luminária" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Luminária de Mesa LED</div>
-          <div class="card-desc">Design moderno com ajuste de intensidade.</div>
-          <div class="card-price">R$ 89,90</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=500&q=80" alt="Vaso Decorativo" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Vaso Cerâmica Minimalista</div>
-          <div class="card-desc">Perfeito para salas, escritórios e quartos.</div>
-          <div class="card-price">R$ 59,90</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=80" alt="Cadeira de Escritório" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Cadeira Ergonômica</div>
-          <div class="card-desc">Conforto prolongado para quem trabalha sentado.</div>
-          <div class="card-price">R$ 450,00</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SETOR 3: ACESSÓRIOS -->
-    <h2 class="sector-title">Acessórios & Estilo</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" alt="Mochila" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Mochila Impermeável</div>
-          <div class="card-desc">Espaço para notebook e compartimentos antifurto.</div>
-          <div class="card-price">R$ 179,90</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80" alt="Óculos de Sol" loading="lazy">
-        <div class="card-content">
-          <div class="card-title">Óculos de Sol Polarizado</div>
-          <div class="card-desc">Proteção UV400 com armação leve e resistente.</div>
-          <div class="card-price">R$ 119,00</div>
-          <a href="#" class="btn-buy">Comprar no WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
   </div>
 
+  <!-- SEÇÃO: BOLOS DE FESTA -->
+  <h2 class="section-title">🎂 Bolos Especiais</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Bolo Red Velvet" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Bolo Red Velvet</div>
+        <div class="card-desc">Massa aveludada com recheio de cream cheese. (1.5kg)</div>
+        <div class="card-price">R$ 110,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo Red Velvet', 110.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Bolo%20Red%20Velvet" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=500&q=80" alt="Bolo de Chocolate Gourmet" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Bolo ChocoGourmet</div>
+        <div class="card-desc">Massa 100% cacau com brigadeiro belga. (1.5kg)</div>
+        <div class="card-price">R$ 98,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo ChocoGourmet', 98.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Bolo%20ChocoGourmet" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=500&q=80" alt="Bolo de Morango" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Bolo Morango Supremo</div>
+        <div class="card-desc">Pão de ló com leite ninho e morangos frescos. (1.5kg)</div>
+        <div class="card-price">R$ 105,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo Morango Supremo', 105.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Bolo%20Morango%20Supremo" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO: DOCES GOURMET -->
+  <h2 class="section-title">🍬 Doces & Brigadeiros</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=80" alt="Canto de Brigadeiros" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Canto do Brigadeiro (10 un)</div>
+        <div class="card-desc">Mistura de brigadeiro ao leite e meio amargo.</div>
+        <div class="card-price">R$ 35,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Canto do Brigadeiro (10 un)', 35.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Canto%20do%20Brigadeiro" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=500&q=80" alt="Caixa Macarons" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Caixa de Macarons (6 un)</div>
+        <div class="card-desc">Sabores variados com farinha de amêndoas pura.</div>
+        <div class="card-price">R$ 42,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Caixa de Macarons (6 un)', 42.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20a%20Caixa%20de%20Macarons" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&q=80" alt="Brownie Recheado" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Brownie Ninho e Nutella</div>
+        <div class="card-desc">Massa molhada com casquinha crocante e recheio duplo.</div>
+        <div class="card-price">R$ 14,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Brownie Ninho e Nutella', 14.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Brownie%20Ninho%20e%20Nutella" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO: SALGADOS -->
+  <h2 class="section-title">🥐 Salgados Artesanais</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=80" alt="Cento de Coxinha" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Cento de Coxinha</div>
+        <div class="card-desc">Frango desfiado com requeijão cremoso (100 un).</div>
+        <div class="card-price">R$ 85,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Cento de Coxinha', 85.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Cento%20de%20Coxinha" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=500&q=80" alt="Empadas Variadas" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Caixa de Empadas (10 un)</div>
+        <div class="card-desc">Massa podre derretendo, recheios de frango e palmito.</div>
+        <div class="card-price">R$ 45,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Caixa de Empadas (10 un)', 45.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20a%20Caixa%20de%20Empadas" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&q=80" alt="Mini Quiches" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Mini Quiches Variadas (20 un)</div>
+        <div class="card-desc">Alho-poró, quatro queijos e queijo com damasco.</div>
+        <div class="card-price">R$ 60,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Mini Quiches (20 un)', 60.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20as%20Mini%20Quiches" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO: KITS FESTA -->
+  <h2 class="section-title">🎉 Kits de Festa Completos</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80" alt="Kit Festa P" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Kit Festa Prático (10 Pessoas)</div>
+        <div class="card-desc">Bolo 1.5kg + 50 Salgados + 30 Doces.</div>
+        <div class="card-price">R$ 190,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit Festa Pratico', 190.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%20Festa%20Pratico" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=500&q=80" alt="Kit Festa M" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Kit Festa Família (20 Pessoas)</div>
+        <div class="card-desc">Bolo 2.5kg + 100 Salgados + 60 Doces + Refrigerante 2L.</div>
+        <div class="card-price">R$ 340,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit Festa Familia', 340.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%20Festa%20Familia" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO: KITS INFANTIS -->
+  <h2 class="section-title">🎈 Kits Infantis Especiais</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80" alt="Kit Cupcake Infantil" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Kit Cupcake Confeiteiro (Infantil)</div>
+        <div class="card-desc">6 cupcakes + bisnagas de recheio e confeitos para a criança decorar.</div>
+        <div class="card-price">R$ 65,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit Cupcake Confeiteiro', 65.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%20Cupcake%20Confeiteiro" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&q=80" alt="Kit Lanche Infantil" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Box Festinha Escolar (Por criança)</div>
+        <div class="card-desc">1 Mini bolo + 5 salguinhos + 3 brigadeiros + 1 suco de caixinha.</div>
+        <div class="card-price">R$ 28,00</div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Box Festinha Escolar', 28.00)">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Box%20Festinha%20Escolar" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARRA INFERIOR DE FINALIZAÇÃO -->
+  <div class="cart-bar">
+    <div class="cart-bar-total">
+      Total: <span id="cartTotal">R$ 0,00</span>
+    </div>
+    <button class="btn-checkout" onclick="finalizarPedido()">Enviar Pedido no WhatsApp 🚀</button>
+  </div>
+
+  <!-- LÓGICA DO CARRINHO EM JAVASCRIPT -->
+  <script>
+    let carrinho = [];
+    let total = 0;
+
+    function adicionarAoCarrinho(nome, preco) {
+      carrinho.push({ nome, preco });
+      total += preco;
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      document.getElementById('cartCount').innerText = carrinho.length;
+      document.getElementById('cartTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function finalizarPedido() {
+      if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio! Adicione alguns produtos antes de finalizar.');
+        return;
+      }
+
+      let telefoneWhatsApp = "5500000000000"; // Substitua pelo seu número real com DDD
+      let mensagem = "Olá, Delícia Gourmet Doces! Gostaria de fazer o seguinte pedido:\n\n";
+
+      carrinho.forEach((item, index) => {
+        mensagem += `${index + 1}. ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}\n`;
+      });
+
+      mensagem += `\n*Total do Pedido:* R$ ${total.toFixed(2).replace('.', ',')}`;
+
+      let url = `https://wa.me/${telefoneWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>
