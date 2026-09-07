@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delícia Gourmet Doces | Cardápio & Kits</title>
+  <title>Delícias da Tati | Cardápio Completo & Kits</title>
   <style>
     * {
       margin: 0;
@@ -194,28 +194,20 @@
       transition: background 0.2s, transform 0.1s;
     }
 
-    .btn-add:active, .btn-wa:active {
-      transform: scale(0.96);
-    }
-
     .btn-add {
       background-color: #333;
       color: #fff;
       border: 1px solid #555;
     }
 
-    .btn-add:hover {
-      background-color: #444;
-    }
+    .btn-add:hover { background-color: #444; }
 
     .btn-wa {
       background-color: #25d366;
       color: #fff;
     }
 
-    .btn-wa:hover {
-      background-color: #1eb954;
-    }
+    .btn-wa:hover { background-color: #1eb954; }
 
     /* MODAL DO CARRINHO */
     .cart-modal {
@@ -237,7 +229,7 @@
       border-radius: 12px;
       width: 100%;
       max-width: 550px;
-      max-height: 80vh;
+      max-height: 85vh;
       display: flex;
       flex-direction: column;
       border: 1px solid #333;
@@ -275,10 +267,22 @@
 
     .cart-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
+      gap: 12px;
+      padding: 10px 0;
       border-bottom: 1px solid #2a2a2a;
+    }
+
+    .cart-item-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid #444;
+    }
+
+    .cart-item-details {
+      flex-grow: 1;
     }
 
     .cart-item-title {
@@ -287,7 +291,7 @@
     }
 
     .cart-item-price {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #46d369;
     }
 
@@ -295,11 +299,10 @@
       background: #e50914;
       color: #fff;
       border: none;
-      padding: 4px 8px;
+      padding: 6px 10px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 0.75rem;
-      margin-left: 10px;
     }
 
     .cart-footer {
@@ -369,10 +372,6 @@
       z-index: 999;
     }
 
-    .cart-bar-total {
-      font-size: 1.1rem;
-    }
-
     .cart-bar-total span {
       color: #46d369;
       font-weight: bold;
@@ -385,12 +384,10 @@
       border: none;
       border-radius: 6px;
       font-weight: bold;
-      font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
-    /* TABELA DE PREÇOS NO FINAL */
+    /* TABELA DE PREÇOS */
     .price-table-container {
       margin: 40px 4%;
       background: #181818;
@@ -417,10 +414,7 @@
       font-size: 0.9rem;
     }
 
-    th {
-      background: #222;
-      color: #fff;
-    }
+    th { background: #222; }
 
     @media (max-width: 600px) {
       .card { min-width: 220px; max-width: 220px; }
@@ -432,7 +426,7 @@
 <body>
 
   <header>
-    <div class="logo">Delícia Gourmet</div>
+    <div class="logo">Delícias da Tati</div>
     <button class="cart-btn-header" onclick="abrirCarrinho()">
       🛒 Carrinho <span class="cart-count" id="cartCount">0</span>
     </button>
@@ -440,16 +434,15 @@
 
   <div class="hero">
     <div class="hero-text">
-      <h1>Delícia Gourmet Doces</h1>
-      <p>Kits de Festa, Bolos Recheados e Salgados Fresquinhos.</p>
+      <h1>Delícias da Tati</h1>
+      <p>Kits de Festa, Salgados Artesanais e Bolos Recheados.</p>
     </div>
   </div>
 
-  <!-- SEÇÃO 1: KITS DE FESTA DA TABELA -->
-  <h2 class="section-title">🎉 Kits de Festa Completos (Tabela Oficial)</h2>
+  <!-- KITS DE FESTA -->
+  <h2 class="section-title">🎉 Kits de Festa Completos</h2>
   <div class="carousel">
     
-    <!-- KIT 01 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80" alt="Kit 01" loading="lazy">
       <div class="card-info">
@@ -460,13 +453,12 @@
           <div class="price-card">Cartão: R$ 130,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 01', 120.00, 130.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2001" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 01', 120.00, 130.00, 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2001" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 02 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&q=80" alt="Kit 02" loading="lazy">
       <div class="card-info">
@@ -477,13 +469,12 @@
           <div class="price-card">Cartão: R$ 190,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 02', 180.00, 190.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2002" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 02', 180.00, 190.00, 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2002" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 03 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=500&q=80" alt="Kit 03" loading="lazy">
       <div class="card-info">
@@ -494,13 +485,12 @@
           <div class="price-card">Cartão: R$ 210,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 03', 200.00, 210.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2003" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 03', 200.00, 210.00, 'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2003" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 04 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80" alt="Kit 04" loading="lazy">
       <div class="card-info">
@@ -511,13 +501,12 @@
           <div class="price-card">Cartão: R$ 420,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 04', 400.00, 420.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2004" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 04', 400.00, 420.00, 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2004" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 05 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Kit 05" loading="lazy">
       <div class="card-info">
@@ -528,13 +517,12 @@
           <div class="price-card">Cartão: R$ 270,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 05', 250.00, 270.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2005" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 05', 250.00, 270.00, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2005" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 06 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=500&q=80" alt="Kit 06" loading="lazy">
       <div class="card-info">
@@ -545,13 +533,12 @@
           <div class="price-card">Cartão: R$ 320,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 06', 300.00, 320.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2006" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 06', 300.00, 320.00, 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2006" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 07 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=500&q=80" alt="Kit 07" loading="lazy">
       <div class="card-info">
@@ -562,32 +549,112 @@
           <div class="price-card">Cartão: R$ 750,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 07', 700.00, 750.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2007" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 07', 700.00, 750.00, 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2007" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
-    <!-- KIT 08 -->
     <div class="card">
       <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=500&q=80" alt="Kit 08 Mega Festa" loading="lazy">
       <div class="card-info">
         <div class="card-title">Kit 08 - Mega Festa</div>
-        <div class="card-desc">Bolo 100 fatias, 150 docinhos, 500 salgados fritos, 200 assados, 150 mini pizzas, torta salgada 100 fatias, 30 cupcakes, 1 fardo refri.</div>
+        <div class="card-desc">Bolo 100 fatias, 150 docinhos, 500 salgados, 200 assados, 150 mini pizzas, torta salgada 100 fatias, 30 cupcakes, 1 fardo refri.</div>
         <div class="card-price-container">
           <div class="price-pix">R$ 1.000,00 <small>(Pix/Dinheiro)</small></div>
-          <div class="price-card">Cartão: R$ 1.100,00 (Até 4x)</div>
+          <div class="price-card">Cartão: R$ 1.100,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 08 Mega Festa', 1000.00, 1100.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20comprar%20o%20Kit%2008" class="btn-wa" target="_blank">WhatsApp</a>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Kit 08 Mega Festa', 1000.00, 1100.00, 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20o%20Kit%2008" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- SEÇÃO 2: BOLOS POR FATIA DA TABELA DELÍCIAS DA TATI -->
+  <!-- SALGADOS E DOCES AVULSOS (REFERÊNCIA DO SITE) -->
+  <h2 class="section-title">🥟 Salgados, Doces & Tortas</h2>
+  <div class="carousel">
+    
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=80" alt="Cento de Salgados Fritos" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Cento de Salgados Fritos</div>
+        <div class="card-desc">Coxinha, Kibe, Bolinha de Queijo, Risóle de Presunto/Queijo (100 un).</div>
+        <div class="card-price-container">
+          <div class="price-pix">R$ 85,00</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Cento Salgados Fritos', 85.00, 85.00, 'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Salgados%20Fritos" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1619860860774-1e2e17343432?w=500&q=80" alt="Cento de Salgados Assados" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Cento de Salgados Assados</div>
+        <div class="card-desc">Empadinhas, Esfihas de Frango/Carne, Enrolado de Salsicha (100 un).</div>
+        <div class="card-price-container">
+          <div class="price-pix">R$ 95,00</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Cento Salgados Assados', 95.00, 95.00, 'https://images.unsplash.com/photo-1619860860774-1e2e17343432?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Salgados%20Assados" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&q=80" alt="Cento de Mini Pizzas" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Cento de Mini Pizzas</div>
+        <div class="card-desc">Massa artesanal com molho especial, queijo, presunto e orégano (100 un).</div>
+        <div class="card-price-container">
+          <div class="price-pix">R$ 90,00</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Cento Mini Pizzas', 90.00, 90.00, 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Mini%20Pizzas" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=80" alt="Cento de Docinhos Tradicionais" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Cento de Docinhos Tradicionais</div>
+        <div class="card-desc">Brigadeiro Gourmet, Beijinho de Coco, Bicho de Pé e Ninho (100 un).</div>
+        <div class="card-price-container">
+          <div class="price-pix">R$ 70,00</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Cento Docinhos', 70.00, 70.00, 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Docinhos" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1621236378699-8597faf6a176?w=500&q=80" alt="Torta Salgada de Frango" loading="lazy">
+      <div class="card-info">
+        <div class="card-title">Torta Salgada (20 Fatias)</div>
+        <div class="card-desc">Torta pão de fôrma com frango desfiado suculento e maionese artesanal.</div>
+        <div class="card-price-container">
+          <div class="price-pix">R$ 110,00</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-add" onclick="adicionarAoCarrinho('Torta Salgada 20 Fatias', 110.00, 110.00, 'https://images.unsplash.com/photo-1621236378699-8597faf6a176?w=100&q=80')">+ Carrinho</button>
+          <a href="https://wa.me/5500000000000?text=Quero%20Torta%20Salgada" class="btn-wa" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOLOS POR FATIA -->
   <h2 class="section-title">🎂 Bolos por Tamanho / Fatias</h2>
   <div class="carousel">
     
@@ -595,12 +662,12 @@
       <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Bolo 15 Fatias" loading="lazy">
       <div class="card-info">
         <div class="card-title">Bolo 15 Fatias</div>
-        <div class="card-desc">Ideal para pequenas comemorações. Escolha o recheio!</div>
+        <div class="card-desc">Ideal para pequenas comemorações. Escolha seu recheio preferido!</div>
         <div class="card-price-container">
           <div class="price-pix">R$ 90,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 15 Fatias', 90.00, 90.00)">+ Carrinho</button>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 15 Fatias', 90.00, 90.00, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=100&q=80')">+ Carrinho</button>
           <a href="https://wa.me/5500000000000?text=Quero%20Bolo%2015%20Fatias" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -610,12 +677,12 @@
       <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=500&q=80" alt="Bolo 20 Fatias" loading="lazy">
       <div class="card-info">
         <div class="card-title">Bolo 20 Fatias</div>
-        <div class="card-desc">Tamanho perfeito para família.</div>
+        <div class="card-desc">Perfeito para reuniões em família com bastante recheio.</div>
         <div class="card-price-container">
           <div class="price-pix">R$ 130,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 20 Fatias', 130.00, 130.00)">+ Carrinho</button>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 20 Fatias', 130.00, 130.00, 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=100&q=80')">+ Carrinho</button>
           <a href="https://wa.me/5500000000000?text=Quero%20Bolo%2020%20Fatias" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -625,12 +692,12 @@
       <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=500&q=80" alt="Bolo 30 Fatias" loading="lazy">
       <div class="card-info">
         <div class="card-title">Bolo 30 Fatias</div>
-        <div class="card-desc">Massa fofinha e muito recheio artesanal.</div>
+        <div class="card-desc">Massa molhadinha com camada dupla de recheio.</div>
         <div class="card-price-container">
           <div class="price-pix">R$ 160,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 30 Fatias', 160.00, 160.00)">+ Carrinho</button>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 30 Fatias', 160.00, 160.00, 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=100&q=80')">+ Carrinho</button>
           <a href="https://wa.me/5500000000000?text=Quero%20Bolo%2030%20Fatias" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -640,12 +707,12 @@
       <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=500&q=80" alt="Bolo 50 Fatias" loading="lazy">
       <div class="card-info">
         <div class="card-title">Bolo 50 Fatias</div>
-        <div class="card-desc">Excelente opção para festas e aniversários.</div>
+        <div class="card-desc">Excelente opção para festas médias de aniversário.</div>
         <div class="card-price-container">
           <div class="price-pix">R$ 220,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 50 Fatias', 220.00, 220.00)">+ Carrinho</button>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 50 Fatias', 220.00, 220.00, 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=100&q=80')">+ Carrinho</button>
           <a href="https://wa.me/5500000000000?text=Quero%20Bolo%2050%20Fatias" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -660,7 +727,7 @@
           <div class="price-pix">R$ 380,00</div>
         </div>
         <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 100 Fatias', 380.00, 380.00)">+ Carrinho</button>
+          <button class="btn-add" onclick="adicionarAoCarrinho('Bolo 100 Fatias', 380.00, 380.00, 'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=100&q=80')">+ Carrinho</button>
           <a href="https://wa.me/5500000000000?text=Quero%20Bolo%20100%20Fatias" class="btn-wa" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -668,60 +735,9 @@
 
   </div>
 
-  <!-- SEÇÃO 3: DOCES E SALGADOS AVULSOS -->
-  <h2 class="section-title">🥟 Doces & Salgados Avulsos</h2>
-  <div class="carousel">
-    
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=80" alt="Cento de Docinhos" loading="lazy">
-      <div class="card-info">
-        <div class="card-title">Cento de Docinhos Tradicionais</div>
-        <div class="card-desc">Brigadeiro, Beijinho, Ninho, Amendoin (100 un).</div>
-        <div class="card-price-container">
-          <div class="price-pix">R$ 70,00</div>
-        </div>
-        <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Cento de Docinhos', 70.00, 70.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Docinhos" class="btn-wa" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=80" alt="Cento de Salgadinhos" loading="lazy">
-      <div class="card-info">
-        <div class="card-title">Cento de Salgadinhos Fritos</div>
-        <div class="card-desc">Coxinha, Bolinha de Queijo, Kibe e Risóle (100 un).</div>
-        <div class="card-price-container">
-          <div class="price-pix">R$ 85,00</div>
-        </div>
-        <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Cento de Salgadinhos', 85.00, 85.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Salgadinhos" class="btn-wa" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&q=80" alt="Mini Pizzas" loading="lazy">
-      <div class="card-info">
-        <div class="card-title">Cento de Mini Pizzas</div>
-        <div class="card-desc">Massa leve com presunto, queijo e orégano (100 un).</div>
-        <div class="card-price-container">
-          <div class="price-pix">R$ 90,00</div>
-        </div>
-        <div class="card-actions">
-          <button class="btn-add" onclick="adicionarAoCarrinho('Cento de Mini Pizzas', 90.00, 90.00)">+ Carrinho</button>
-          <a href="https://wa.me/5500000000000?text=Quero%20Cento%20de%20Mini%20Pizzas" class="btn-wa" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- TABELA RESUMO DE PREÇOS (CONFORME SOLICITADO) -->
+  <!-- TABELA OFICIAL DE BOLOS -->
   <div class="price-table-container">
-    <h3>📋 Tabela de Preços Oficial de Bolos (Fatias)</h3>
+    <h3>📋 Tabela Oficial de Bolos (Fatias)</h3>
     <table>
       <thead>
         <tr>
@@ -758,7 +774,7 @@
     <button class="btn-checkout" onclick="abrirCarrinho()">Ver Carrinho / Finalizar 🚀</button>
   </div>
 
-  <!-- MODAL DO CARRINHO COM OPÇÃO DE EXCLUIR ITEM E ESVAZIAR -->
+  <!-- MODAL DO CARRINHO COM MINIATURAS E REMOÇÃO -->
   <div class="cart-modal" id="cartModal">
     <div class="cart-modal-content">
       <div class="cart-header">
@@ -792,16 +808,17 @@
     </div>
   </div>
 
-  <!-- SCRIPT DO CARRINHO E INTERAÇÕES -->
+  <!-- JAVASCRIPT CORRIGIDO -->
   <script>
     let carrinho = [];
 
-    function adicionarAoCarrinho(nome, precoPix, precoCartao) {
+    function adicionarAoCarrinho(nome, precoPix, precoCartao, imgUrl) {
       carrinho.push({
         id: Date.now() + Math.random(),
         nome: nome,
         precoPix: precoPix,
-        precoCartao: precoCartao
+        precoCartao: precoCartao,
+        imgUrl: imgUrl
       });
       atualizarContadores();
     }
@@ -813,7 +830,7 @@
     }
 
     function esvaziarCarrinho() {
-      if (confirm("Tem certeza que deseja esvaziar o carrinho?")) {
+      if (confirm("Deseja realmente limpar todo o carrinho?")) {
         carrinho = [];
         renderizarCarrinho();
         atualizarContadores();
@@ -854,7 +871,8 @@
           const preco = metodo === 'pix' ? item.precoPix : item.precoCartao;
           container.innerHTML += `
             <div class="cart-item">
-              <div>
+              <img src="${item.imgUrl}" alt="${item.nome}" class="cart-item-img">
+              <div class="cart-item-details">
                 <div class="cart-item-title">${item.nome}</div>
                 <div class="cart-item-price">R$ ${preco.toFixed(2).replace('.', ',')}</div>
               </div>
@@ -871,15 +889,15 @@
 
     function enviarPedidoWhatsApp() {
       if (carrinho.length === 0) {
-        alert("Adicione pelo menos um produto ao carrinho antes de enviar!");
+        alert("Seu carrinho está vazio! Adicione produtos antes de enviar.");
         return;
       }
 
       const metodo = document.getElementById('paymentMethod').value;
       const metodoTexto = metodo === 'pix' ? 'Dinheiro / Pix' : 'Cartão';
-      let telefoneWhatsApp = "5500000000000"; // INSIRA SEU NÚMERO AQUI COM DDD
+      let telefoneWhatsApp = "5500000000000"; // INSIRA SEU WHATSAPP AQUI COM DDD
 
-      let mensagem = `Olá, Delícia Gourmet Doces! Gostaria de fazer o seguinte pedido:\n\n`;
+      let mensagem = `Olá, Delícias da Tati! Gostaria de realizar o seguinte pedido:\n\n`;
       
       carrinho.forEach((item, index) => {
         const preco = metodo === 'pix' ? item.precoPix : item.precoCartao;
@@ -888,7 +906,7 @@
 
       const total = calcularTotal();
       mensagem += `\n*Forma de Pagamento:* ${metodoTexto}`;
-      mensagem += `\n*Total a Pagar:* R$ ${total.toFixed(2).replace('.', ',')}`;
+      mensagem += `\n*Total:* R$ ${total.toFixed(2).replace('.', ',')}`;
 
       const url = `https://wa.me/${telefoneWhatsApp}?text=${encodeURIComponent(mensagem)}`;
       window.open(url, '_blank');
